@@ -15,11 +15,53 @@ func Init() *echo.Echo {
 	e.Use(middleware.Recover()) // Recover from panics
 	e.Use(middleware.Gzip()) // Send gzip HTTP response
 	// API Version name
-	v1 := e.Group("/api/v1")
+	api := e.Group("/api")
 	{
-		// CRUD
-		v1.Post("/papers", func(c echo.Context) error {
-			return c.String(http.StatusOK, "papers")
+		//User Papers
+		api.Get("/:username/papers", func (c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s papers")
+		})
+		api.Get("/:username/papers/:id", func (c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ")")
+		})
+		api.Post("/:username/papers", func(c echo.Context) error {
+			return c.String(http.StatusCreated, c.Param("username") + "'s new paper")
+		})
+		api.Put("/:username/papers/:id", func(c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") is updated!")
+		})
+		api.Delete("/:username/papers/:id", func(c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") is Deleted!")
+		})
+		
+		//User Paper Conntents		
+		api.Get("/:username/papers/:id/contents", func(c echo.Context) error {
+			return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
+		})
+		
+		//User Paper Tags
+		api.Post("/:username/papers/:id/tags", func(c echo.Context) error {
+			return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
+		})
+		api.Delete("/:username/papers/:id/tags", func(c echo.Context) error {
+			return c.String(http.StatusOK, "delete tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
+		})
+		
+		// User Stocks
+		api.Get("/:username/stocks", func (c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s stocks")
+		})
+		api.Delete("/:username/stocks/:paper_id", func(c echo.Context) error {
+			return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
+		})
+		
+		
+		// Tag List
+		api.Get("/tags", func (c echo.Context) error {
+			return c.String(http.StatusOK, "tag list")
+		})
+		api.Get("/tags/:id", func (c echo.Context) error {
+			return c.String(http.StatusOK, "tag(" + c.Param("id") + ")")
 		})
 	}
 	return e
