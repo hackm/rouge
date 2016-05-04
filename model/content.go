@@ -6,10 +6,9 @@ import (
 
 // Content struct
 type Content struct {
-	ID        uint32
-	PaperID   uint32
-	Title     string
-	Body      []byte
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	ID        uint32    `json:"id" form:"name" db:"id"`
+	PaperID   uint32    `json:"paperId" form:"paperId" db:"paper_id"`
+	Title     string    `json:"title" form:"title" db:"title"`
+	Body      []byte    `json:"body" form:"body" db:"body"`
+	CreatedAt time.Time `json:"createdAt" form:"createdAt" db:"created_at"`
 }
