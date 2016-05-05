@@ -1,14 +1,15 @@
 package route
 
 import (
-	"github.com/labstack/echo"
-	"github.com/labstack/echo/middleware"
 	"net/http"
-	"../model/vm"
+
 	"../controllers/api/content"
 	"../controllers/api/paper"
 	"../controllers/api/stock"
 	"../controllers/api/tag"
+	"../models/vm"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 )
 
 func Init() *echo.Echo {
@@ -16,9 +17,9 @@ func Init() *echo.Echo {
 	// Debug
 	e.Debug()
 	// Setup Middleware
-	e.Use(middleware.Logger()) // Log HTTP requests
+	e.Use(middleware.Logger())  // Log HTTP requests
 	e.Use(middleware.Recover()) // Recover from panics
-	e.Use(middleware.Gzip()) // Send gzip HTTP response
+	e.Use(middleware.Gzip())    // Send gzip HTTP response
 	// API Version name
 	api := e.Group("/api")
 	{
@@ -50,46 +51,46 @@ func Init() *echo.Echo {
 	}
 
 	e.SetRenderer(CreateRenderer())
-	e.Get("/", func (c echo.Context) error{
+	e.Get("/", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "top", vm.ViewData{
 			Meta: vm.Meta{
-				Title: "Top",
+				Title:       "Top",
 				Description: "This is top page.",
 			},
 			Theme: "simple",
 		})
 	})
-	e.Get("/:username/papers", func (c echo.Context) error{
+	e.Get("/:username/papers", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "papers", vm.ViewData{
 			Meta: vm.Meta{
-				Title: "Papers",
+				Title:       "Papers",
 				Description: "This is paper list page.",
 			},
 			Theme: "simple",
 		})
 	})
-	e.Get("/:username/papers/:id", func (c echo.Context) error{
+	e.Get("/:username/papers/:id", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "paper", vm.ViewData{
-			Meta: vm.Meta{ 
-				Title: "Paper", 
+			Meta: vm.Meta{
+				Title:       "Paper",
 				Description: "This is paper page.",
 			},
 			Theme: "simple",
 		})
 	})
-	e.Get("/tags/:id", func (c echo.Context) error{
+	e.Get("/tags/:id", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "tag", vm.ViewData{
 			Meta: vm.Meta{
-				Title: "Tag",
+				Title:       "Tag",
 				Description: "This is tag page.",
 			},
 			Theme: "simple",
 		})
 	})
-	e.Get("/search", func (c echo.Context) error{
+	e.Get("/search", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "search", vm.ViewData{
 			Meta: vm.Meta{
-				Title: "Search",
+				Title:       "Search",
 				Description: "This is search page.",
 			},
 			Theme: "simple",
