@@ -11,6 +11,8 @@ import (
 	"../controllers/paper"
 	"../controllers/tag"
 	"../controllers/search"
+	"../controllers/api/tag"
+	"../models/vm"
 )
 
 func Init() *echo.Echo {
@@ -18,9 +20,9 @@ func Init() *echo.Echo {
 	// Debug
 	e.Debug()
 	// Setup Middleware
-	e.Use(middleware.Logger()) // Log HTTP requests
+	e.Use(middleware.Logger())  // Log HTTP requests
 	e.Use(middleware.Recover()) // Recover from panics
-	e.Use(middleware.Gzip()) // Send gzip HTTP response
+	e.Use(middleware.Gzip())    // Send gzip HTTP response
 	// API Version name
 	api := e.Group("/api")
 	{
@@ -57,7 +59,7 @@ func Init() *echo.Echo {
 	e.Get("/:username/papers/:id", paper.GetPaper)
 	e.Get("/tags/:name", tag.GetTag)
 	e.Get("/search", search.GetSearch)
-
+	
 	e.Static("/statics", "statics")
 	return e
 }
