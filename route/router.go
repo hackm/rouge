@@ -5,7 +5,9 @@ import (
 	"github.com/labstack/echo/middleware"
 	"net/http"
 	"../model/vm"
+	"../api/content"
 	"../api/paper"
+	"../api/stock"
 	"../api/tag"
 )
 
@@ -21,26 +23,23 @@ func Init() *echo.Echo {
 	api := e.Group("/api")
 	{
 		//User Papers
-		api.Get("/:username/papers", paper.GetUserPapers)
-		api.Get("/:username/papers/:id", paper.GetPaper)
-		api.Post("/:username/papers", paper.CreatePaper)
-		api.Put("/:username/papers/:id", paper.UpdatePaper)
-		api.Delete("/:username/papers/:id", paper.DeletePaper)
+		api.Get("/papers", paper.GetUserPapers)
+		api.Get("/papers/:id", paper.GetPaper)
+		api.Post("/papers", paper.CreatePaper)
+		api.Put("/papers/:id", paper.UpdatePaper)
+		api.Delete("/papers/:id", paper.DeletePaper)
 
 		//User Paper Conntents
-		api.Get("/:username/papers/:id/contents", paper.GetPaperContents)
+		api.Get("/papers/:id/contents", content.GetContents)
 
 		//User Paper Tags
-		api.Post("/:username/papers/:id/tags", paper.AddPaperTag)
-		api.Delete("/:username/papers/:id/tags", paper.DeletePaperTag)
+		api.Post("/papers/:id/tags", paper.AddPaperTag)
+		api.Delete("/papers/:id/tags", paper.DeletePaperTag)
 
 		// User Stocks
-		api.Get("/:username/stocks", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s stocks")
-		})
-		api.Delete("/:username/stocks/:paper_id", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
-		})
+		api.Get("/stocks", stock.GetStocks)
+		api.Post("/stocks/:paper_id", stock.CreateStock)
+		api.Delete("/stocks/:paper_id", stock.DeleteStock)
 
 		// Tag
 		api.Get("/tags", tag.GetTags)
@@ -53,8 +52,8 @@ func Init() *echo.Echo {
 	e.SetRenderer(CreateRenderer())
 	e.Get("/:username/papers", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "papers", vm.ViewData{
-			Meta: vm.Meta{ 
-				Title: "Papers", 
+			Meta: vm.Meta{
+				Title: "Papers",
 				Description: "This is paper list page.",
 			},
 			Theme: "simple",
@@ -71,8 +70,8 @@ func Init() *echo.Echo {
 	})
 	e.Get("/tags", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "tags", vm.ViewData{
-			Meta: vm.Meta{ 
-				Title: "Tags", 
+			Meta: vm.Meta{
+				Title: "Tags",
 				Description: "This is tag list page.",
 			},
 			Theme: "simple",
@@ -80,8 +79,8 @@ func Init() *echo.Echo {
 	})
 	e.Get("/tags/:id", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "tag", vm.ViewData{
-			Meta: vm.Meta{ 
-				Title: "Tag", 
+			Meta: vm.Meta{
+				Title: "Tag",
 				Description: "This is tag page.",
 			},
 			Theme: "simple",
