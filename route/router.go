@@ -68,24 +68,40 @@ func Init() *echo.Echo {
 	
 	e.SetRenderer(CreateRenderer())
 	e.Get("/:username/papers", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "papers", vm.Meta{ 
-			Title: "Papers", 
-			Description: "This is paper list page."})
+		return c.Render(http.StatusOK, "papers", vm.ViewData{
+			Meta: vm.Meta{ 
+				Title: "Papers", 
+				Description: "This is paper list page.",
+			},
+			Theme: "simple"
+		})
 	})
 	e.Get("/:username/papers/:id", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "paper", vm.Meta{ 
-			Title: "Paper", 
-			Description: "This is paper page."})
+		return c.Render(http.StatusOK, "paper", vvm.ViewData{
+			Meta: vm.Meta{ 
+				Title: "Paper", 
+				Description: "This is paper page."
+			},
+			Theme: "simple",
+		})
 	})
 	e.Get("/tags", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "tags", vm.Meta{ 
-			Title: "Tags", 
-			Description: "This is tag list page."})
+		return c.Render(http.StatusOK, "tags", vm.ViewData{
+			Meta: vm.Meta{ 
+				Title: "Tags", 
+				Description: "This is tag list page."
+			},
+			Theme: "simple",
+		})
 	})
 	e.Get("/tags/:id", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "tag", vm.Meta{ 
-			Title: "Tag", 
-			Description: "This is tag page."})
+		return c.Render(http.StatusOK, "tag", vm.ViewData{
+			Meta: vm.Meta{ 
+				Title: "Tag", 
+				Description: "This is tag page."
+			},
+			Theme: "simple",
+		})
 	})
 	
 	e.Static("/static", "static")
