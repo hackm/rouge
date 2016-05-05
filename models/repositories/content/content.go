@@ -8,7 +8,7 @@ type IContentRepository interface {
 
 type ContentRepository struct {}
 
-func NewContentRepository() ContentRepository {
+func NewContentRepository() IContentRepository {
   return ContentRepository{}
 }
 
