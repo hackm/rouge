@@ -11,7 +11,6 @@ import (
 	"../controllers/paper"
 	"../controllers/tag"
 	"../controllers/search"
-	"../controllers/api/tag"
 )
 
 func Init() *echo.Echo {
