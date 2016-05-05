@@ -11,7 +11,12 @@
   function AjaxError(status, message) {
     this.message = "'" + status + "': " + message;
   }
-  
+  function qp(params) {
+    var _params = Object.keys(params).filter(function(key){ return typeof(params[key]) == 'undefined'; });
+    return _params.length > 0 
+      ? "?" + _params.map(function(key) { return key + "=" + params[key];}).join("&")
+      : "";
+  }
   function  loadJson(url, validation) {
     return new Promise(function(resolve, reject) {
       fetch(url, {
@@ -44,6 +49,10 @@
         });
       }
     })
+  }
+  function loadPapers(params) {
+    var url = prefix + "papers" + qp(params);
+    return loadJson(url);
   }
   
   window.Rouge = {

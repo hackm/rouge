@@ -1,20 +1,26 @@
 <papers>
   <style scoped>
-      h1.active{
-          color: red;
-      }
   </style>
   
-  <h1 onclick="{ click }">
+  <h1>
     Papers
   </h1>
   
-  <p>this is custom tag which be created by riot. </p>
+  <p>{dump}</p>
   
   <script>
-        this.css = ""
-        this.click = function (e) {
-            alert("Hello,World");
-        }
-    </script>
+    this.dump = "";
+    
+    var self = this;
+    var data = {
+        tag: opts.tag,
+        username: opts.user
+    };
+    
+    Rouge.loadPapers(function(papers){
+      self.dump = JSON.stringify(papers);
+      self.update();
+    })
+    
+  </script>
 </papers>
