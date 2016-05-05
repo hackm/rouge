@@ -64,5 +64,11 @@ func Init() *echo.Echo {
 			return c.String(http.StatusOK, "tag(" + c.Param("id") + ")")
 		})
 	}
+	
+	e.SetRenderer(CreateRenderer())
+	e.Get("/:username/papers", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "papers", nil)
+	})
+	
 	return e
 }
