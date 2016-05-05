@@ -5,8 +5,9 @@ import (
 	"github.com/labstack/echo/middleware"
 	"../controllers/api/content"
 	apiPaper "../controllers/api/paper"
-	apiTag "../controllers/api/tag"	
+	apiTag "../controllers/api/tag"
 	"../controllers/api/stock"
+	"../controllers/api/user"
 	"../controllers/top"
 	"../controllers/paper"
 	"../controllers/tag"
@@ -24,6 +25,9 @@ func Init() *echo.Echo {
 	// API Version name
 	api := e.Group("/api")
 	{
+		// User
+		api.Post("users", user.CreateUser)
+
 		//User Papers
 		api.Get("/papers", apiPaper.GetUserPapers)
 		api.Get("/papers/:id", apiPaper.GetPaper)
@@ -57,7 +61,6 @@ func Init() *echo.Echo {
 	e.Get("/:username/papers/:id", paper.GetPaper)
 	e.Get("/tags/:name", tag.GetTag)
 	e.Get("/search", search.GetSearch)
-	
 
 	e.Static("/statics", "statics")
 	return e
