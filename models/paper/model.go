@@ -6,7 +6,7 @@ import (
 
 // Paper struct
 type Paper struct {
-	ID        uint32 `json:"id" form:"id" db:"id"`
+	ID        int64 `json:"id" form:"id" db:"id"`
 	User      *User
 	Content   *Content
 	Tags      []*Tag
