@@ -5,6 +5,7 @@ import (
 	"github.com/labstack/echo/middleware"
 	"net/http"
 	"../model/vm"
+	"../api/content"
 	"../api/paper"
 	"../api/tag"
 )
@@ -28,7 +29,7 @@ func Init() *echo.Echo {
 		api.Delete("/:username/papers/:id", paper.DeletePaper)
 
 		//User Paper Conntents
-		api.Get("/:username/papers/:id/contents", paper.GetPaperContents)
+		api.Get("/:username/papers/:id/contents", content.GetContents)
 
 		//User Paper Tags
 		api.Post("/:username/papers/:id/tags", paper.AddPaperTag)

@@ -31,11 +31,6 @@ func DeletePaper(c echo.Context) error {
 	return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") is Deleted!")
 }
 
-//GetPaperConntents retrieve paper's contents list
-func GetPaperContents(c echo.Context) error {
-	return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
-}
-
 //AddPaperTag add new tag for paper
 func AddPaperTag(c echo.Context) error {
 	return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
