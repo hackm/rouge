@@ -5,6 +5,8 @@ import (
 	"github.com/labstack/echo/middleware"
 	"net/http"
 	"../model/vm"
+	"../api/paper"
+	"../api/tag"
 )
 
 func Init() *echo.Echo {
@@ -19,53 +21,35 @@ func Init() *echo.Echo {
 	api := e.Group("/api")
 	{
 		//User Papers
-		api.Get("/:username/papers", func (c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s papers")
-		})
-		api.Get("/:username/papers/:id", func (c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ")")
-		})
-		api.Post("/:username/papers", func(c echo.Context) error {
-			return c.String(http.StatusCreated, c.Param("username") + "'s new paper")
-		})
-		api.Put("/:username/papers/:id", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") is updated!")
-		})
-		api.Delete("/:username/papers/:id", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") is Deleted!")
-		})
-		
-		//User Paper Conntents		
-		api.Get("/:username/papers/:id/contents", func(c echo.Context) error {
-			return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
-		})
-		
+		api.Get("/:username/papers", paper.GetUserPapers)
+		api.Get("/:username/papers/:id", paper.GetPaper)
+		api.Post("/:username/papers", paper.CreatePaper)
+		api.Put("/:username/papers/:id", paper.UpdatePaper)
+		api.Delete("/:username/papers/:id", paper.DeletePaper)
+
+		//User Paper Conntents
+		api.Get("/:username/papers/:id/contents", paper.GetPaperContents)
+
 		//User Paper Tags
-		api.Post("/:username/papers/:id/tags", func(c echo.Context) error {
-			return c.String(http.StatusOK, "add tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
-		})
-		api.Delete("/:username/papers/:id/tags", func(c echo.Context) error {
-			return c.String(http.StatusOK, "delete tag to " + c.Param("username") + "'s paper(" + c.Param("id") + ")")
-		})
-		
+		api.Post("/:username/papers/:id/tags", paper.AddPaperTag)
+		api.Delete("/:username/papers/:id/tags", paper.DeletePaperTag)
+
 		// User Stocks
-		api.Get("/:username/stocks", func (c echo.Context) error {
+		api.Get("/:username/stocks", func(c echo.Context) error {
 			return c.String(http.StatusOK, c.Param("username") + "'s stocks")
 		})
 		api.Delete("/:username/stocks/:paper_id", func(c echo.Context) error {
 			return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
 		})
-		
-		
-		// Tag List
-		api.Get("/tags", func (c echo.Context) error {
-			return c.String(http.StatusOK, "tag list")
-		})
-		api.Get("/tags/:id", func (c echo.Context) error {
-			return c.String(http.StatusOK, "tag(" + c.Param("id") + ")")
-		})
+
+		// Tag
+		api.Get("/tags", tag.GetTags)
+		api.Get("/tags/:id", tag.GetTag)
+		api.Post("/tags", tag.CreateTag)
+		api.Put("/tags/:id", tag.UpdateTag)
+		api.Delete("/tags/:id", tag.DeleteTag)
 	}
-	
+
 	e.SetRenderer(CreateRenderer())
 	e.Get("/:username/papers", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "papers", vm.ViewData{
@@ -103,7 +87,7 @@ func Init() *echo.Echo {
 			Theme: "simple",
 		})
 	})
-	
+
 	e.Static("/static", "static")
 	return e
 }
