@@ -1,0 +1,20 @@
+{
+  "name": "simple-theme",
+  "version": "1.0.0",
+  "description": "Simple theme for Rouge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "iwate",
+  "license": "MIT",
+  "dependencies": {
+    "riot": "^2.3.18"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-riot": "^0.4.9",
+    "gulp-uglify": "^1.5.3"
+  }
+}
