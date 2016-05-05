@@ -60,6 +60,7 @@ func Init() *echo.Echo {
 	e.Get("/tags/:name", tag.GetTag)
 	e.Get("/search", search.GetSearch)
 	
+
 	e.Static("/statics", "statics")
 	return e
 }
