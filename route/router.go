@@ -57,14 +57,14 @@ func Init() *echo.Echo {
 				Title: "Papers", 
 				Description: "This is paper list page.",
 			},
-			Theme: "simple"
+			Theme: "simple",
 		})
 	})
 	e.Get("/:username/papers/:id", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "paper", vvm.ViewData{
+		return c.Render(http.StatusOK, "paper", vm.ViewData{
 			Meta: vm.Meta{ 
 				Title: "Paper", 
-				Description: "This is paper page."
+				Description: "This is paper page.",
 			},
 			Theme: "simple",
 		})
@@ -73,7 +73,7 @@ func Init() *echo.Echo {
 		return c.Render(http.StatusOK, "tags", vm.ViewData{
 			Meta: vm.Meta{ 
 				Title: "Tags", 
-				Description: "This is tag list page."
+				Description: "This is tag list page.",
 			},
 			Theme: "simple",
 		})
@@ -82,7 +82,7 @@ func Init() *echo.Echo {
 		return c.Render(http.StatusOK, "tag", vm.ViewData{
 			Meta: vm.Meta{ 
 				Title: "Tag", 
-				Description: "This is tag page."
+				Description: "This is tag page.",
 			},
 			Theme: "simple",
 		})
