@@ -13,66 +13,80 @@ type IPaperRepository interface {
 	DeletePaper(id int64) error
 }
 
-type PaperRepository struct{}
-
-func NewPaperRepository() PaperRepository {
-	return PaperRepository{}
+type PaperRepository struct{
+	store []Paper	
 }
 
-func (r PaperRepository) GetPaper(id int64) Paper {
-	p := make(Paper)
-	p["id"] = id
-	p["userId"] = int64(1000)
-	p["contentId"] = int64(2000)
-
-	return p
-}
-func (r PaperRepository) GetUserPapers(userId int64) []Paper {
-	p1 := make(Paper)
-	p1["id"] = int64(1000)
-	p1["userId"] = int64(1000)
-	p1["contentId"] = int64(2000)
-
-	p2 := make(Paper)
-	p2["id"] = int64(1001)
-	p2["userId"] = int64(1000)
-	p2["contentId"] = int64(2001)
-
-	return []Paper{p1, p2}
-}
-func (r PaperRepository) GetTagPapers(tag string) []Paper {
-	p1 := make(Paper)
-	p1["id"] = int64(1000)
-	p1["userId"] = int64(1000)
-	p1["contentId"] = int64(2000)
-
-	p2 := make(Paper)
-	p2["id"] = int64(1001)
-	p2["userId"] = int64(1000)
-	p2["contentId"] = int64(2001)
-
-	return []Paper{p1, p2}
-}
-func (r PaperRepository) GetPapers(keyword string) []Paper {
-	p1 := make(Paper)
-	p1["id"] = int64(1000)
-	p1["userId"] = int64(1000)
-	p1["contentId"] = int64(2000)
-
-	p2 := make(Paper)
-	p2["id"] = int64(1001)
-	p2["userId"] = int64(1000)
-	p2["contentId"] = int64(2001)
-
-	return []Paper{p1, p2}
+func NewPaperRepository() *PaperRepository {
+	return &PaperRepository{
+		store: []Paper{
+			Paper{
+				"id": int64(1000),
+				"userId": int64(1000),
+				"contentId": int64(2000),
+			},
+		},
+	}
 }
 
-func (r PaperRepository) CreatePaper(p Paper) error {
+func (r *PaperRepository) GetPaper(id int64) Paper {
+	var sp Paper
+	for _, v := range r.store {
+		if v["id"] == id {
+			sp = v
+			break
+		}
+	}
+	return sp
+}
+
+func (r *PaperRepository) GetUserPapers(userId int64) []Paper {
+	return r.store
+}
+
+func (r *PaperRepository) GetTagPapers(tag string) []Paper {
+	return r.store
+}
+
+func (r *PaperRepository) GetPapers(keyword string) []Paper {
+	return r.store
+}
+
+var index = int64(1000)
+func (r *PaperRepository) CreatePaper(p Paper) error {
+	index = index + 1
+	p["id"] = index
+	r.store = append(r.store, p)
 	return nil
 }
-func (r PaperRepository) UpdatePaper(p Paper) error {
+
+func (r *PaperRepository) UpdatePaper(p Paper) error {
+	var sp Paper
+	for _, v := range r.store {
+		if v["id"] == p["id"] {
+			sp = v
+			break
+		}
+	}
+	if sp == nil{
+		// return error
+	}
+	sp["id"] = p["id"]
+	sp["contentId"] = p["contentId"]
 	return nil
 }
-func (r PaperRepository) DeletePaper(id int64) error {
+
+func (r *PaperRepository) DeletePaper(id int64) error {
+	idx := int64(-1)
+	for i, v := range r.store {
+		if v["id"] == id {
+			idx = int64(i)
+			break
+		}
+	}
+	if idx == -1 {
+		// return error
+	}
+	r.store = append(r.store[:idx], r.store[idx+1:]...)
 	return nil
 }
