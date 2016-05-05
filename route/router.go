@@ -50,6 +50,15 @@ func Init() *echo.Echo {
 	}
 
 	e.SetRenderer(CreateRenderer())
+	e.Get("/", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "top", vm.ViewData{
+			Meta: vm.Meta{
+				Title: "Top",
+				Description: "This is top page.",
+			},
+			Theme: "simple",
+		})
+	})
 	e.Get("/:username/papers", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "papers", vm.ViewData{
 			Meta: vm.Meta{
@@ -68,20 +77,20 @@ func Init() *echo.Echo {
 			Theme: "simple",
 		})
 	})
-	e.Get("/tags", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "tags", vm.ViewData{
-			Meta: vm.Meta{
-				Title: "Tags",
-				Description: "This is tag list page.",
-			},
-			Theme: "simple",
-		})
-	})
 	e.Get("/tags/:id", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "tag", vm.ViewData{
 			Meta: vm.Meta{
 				Title: "Tag",
 				Description: "This is tag page.",
+			},
+			Theme: "simple",
+		})
+	})
+	e.Get("/search", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "search", vm.ViewData{
+			Meta: vm.Meta{
+				Title: "Search",
+				Description: "This is search page.",
 			},
 			Theme: "simple",
 		})

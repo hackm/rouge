@@ -22,6 +22,7 @@ func CreateRenderer() *Renderer {
       "templates/paper.tmpl",      
       "templates/papers.tmpl",
       "templates/tag.tmpl",
-      "templates/tags.tmpl")),
+      "templates/top.tmpl",
+      "templates/search.tmpl")),
   }
 }
