@@ -1,0 +1,31 @@
+<paper>
+  <style scoped>
+  </style>
+  
+  <article>
+    <h1>{title}</h1>
+    <p><span>{author}</span><span>{pubDate}</span></p>
+    {body}
+  </article>
+  <div>
+    <p>{dump}</p>
+  </div>
+  
+  <script>
+    this.title = "now loading...";
+    this.body = "now loading...";
+    this.author = "now loading...";
+    this.pubDate = new Date();
+    this.dump = JSON.stringify(opts);
+    var self = this;
+    var paperId = opts.id;
+    
+    if(paperId ){
+      Rouge.loadPaper(paperId).then(function(paper){
+        self.title = paper.content.title;
+        self.body = paper.content.body;
+        self.author = paper.user.displayName;
+      })
+    }
+  </script>
+</paper>
