@@ -15,7 +15,7 @@ func GetTag(c echo.Context) error {
 	return c.String(http.StatusOK, "tag(" + c.Param("id") + ")")
 }
 
-//CreateTag create a new tag for name
+//CreateTag create a new tag
 func CreateTag(c echo.Context) error {
 	return c.String(http.StatusOK, "tag(" + c.Param("name") + ") created")
 }
