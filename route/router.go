@@ -4,6 +4,7 @@ import (
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"net/http"
+	"../model/vm"
 )
 
 func Init() *echo.Echo {
@@ -67,7 +68,24 @@ func Init() *echo.Echo {
 	
 	e.SetRenderer(CreateRenderer())
 	e.Get("/:username/papers", func (c echo.Context) error{
-		return c.Render(http.StatusOK, "papers", nil)
+		return c.Render(http.StatusOK, "papers", vm.Meta{ 
+			Title: "Papers", 
+			Description: "This is paper list page."})
+	})
+	e.Get("/:username/papers/:id", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "paper", vm.Meta{ 
+			Title: "Paper", 
+			Description: "This is paper page."})
+	})
+	e.Get("/tags", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "tags", vm.Meta{ 
+			Title: "Tags", 
+			Description: "This is tag list page."})
+	})
+	e.Get("/tags/:id", func (c echo.Context) error{
+		return c.Render(http.StatusOK, "tag", vm.Meta{ 
+			Title: "Tag", 
+			Description: "This is tag page."})
 	})
 	
 	return e
