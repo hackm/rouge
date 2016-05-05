@@ -88,5 +88,6 @@ func Init() *echo.Echo {
 			Description: "This is tag page."})
 	})
 	
+	e.Static("/static", "static")
 	return e
 }

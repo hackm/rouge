@@ -1,0 +1,1 @@
+riot.tag2("papers",'<h1 onclick="{click}"> Papers </h1> <p>this is custom tag which be created by riot. </p>','papers h1.active,[riot-tag="papers"] h1.active,[data-is="papers"] h1.active{ color: red; }',"",function(t){this.css="",this.click=function(t){alert("Hello,World")}});
