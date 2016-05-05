@@ -8,11 +8,11 @@ type IContentRepository interface {
 
 type ContentRepository struct {}
 
-func NewContentRepository *ContentRepository {
-  return &ContentRepository{}
+func NewContentRepository() ContentRepository {
+  return ContentRepository{}
 }
 
-func (r *ContentRepository) GetContent(id int64) Content {
+func (r ContentRepository) GetContent(id int64) Content {
   c := make(Content)
   c["id"] = id
   c["title"] = "Sample"

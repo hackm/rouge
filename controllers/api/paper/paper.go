@@ -4,6 +4,8 @@ import ()
 import (
 	"github.com/labstack/echo"
 	"net/http"
+	"strconv"
+	"../../../models/paper_service"
 )
 
 //GetUserPapers retrieves papers
@@ -18,7 +20,10 @@ func GetUserPapers(c echo.Context) error {
 
 //GetUserPaper retrieves papers by username & ID
 func GetPaper(c echo.Context) error {
-	return c.String(http.StatusOK, "paper(" + c.Param("id") + ")")
+	id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
+	s := paper_service.NewPaperService()
+	p := s.GetPaper(id)
+	return c.JSON(http.StatusOK, p)
 }
 
 //CreateUserPaper creates a new paper and content record

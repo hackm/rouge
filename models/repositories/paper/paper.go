@@ -15,61 +15,64 @@ type IPaperRepository interface {
 
 type PaperRepository struct{}
 
-func NewPaperRepository() *PaperRepository {
-	return &PaperRepository{}
+func NewPaperRepository() PaperRepository {
+	return PaperRepository{}
 }
 
-func (r *PaperRepository) GetPaper(id int64) Paper {
+func (r PaperRepository) GetPaper(id int64) Paper {
 	p := make(Paper)
 	p["id"] = id
-	p["userId"] = 1000
-	p["contentId"] = 2000
+	p["userId"] = int64(1000)
+	p["contentId"] = int64(2000)
 
 	return p
 }
-func (r *PaperRepository) GetUserPapers(userId int64) []Paper {
+func (r PaperRepository) GetUserPapers(userId int64) []Paper {
 	p1 := make(Paper)
-	p1["id"] = 1000
-	p1["userId"] = 1000
-	p1["contentId"] = 2000
+	p1["id"] = int64(1000)
+	p1["userId"] = int64(1000)
+	p1["contentId"] = int64(2000)
 
 	p2 := make(Paper)
-	p2["id"] = 1001
-	p2["userId"] = 1000
-	p2["contentId"] = 2001
+	p2["id"] = int64(1001)
+	p2["userId"] = int64(1000)
+	p2["contentId"] = int64(2001)
 
 	return []Paper{p1, p2}
 }
-func (r *PaperRepository) GetTagPapers(tag string) []Paper {
+func (r PaperRepository) GetTagPapers(tag string) []Paper {
 	p1 := make(Paper)
-	p1["id"] = 1000
-	p1["userId"] = 1000
-	p1["contentId"] = 2000
+	p1["id"] = int64(1000)
+	p1["userId"] = int64(1000)
+	p1["contentId"] = int64(2000)
 
 	p2 := make(Paper)
-	p2["id"] = 1001
-	p2["userId"] = 1000
-	p2["contentId"] = 2001
+	p2["id"] = int64(1001)
+	p2["userId"] = int64(1000)
+	p2["contentId"] = int64(2001)
 
 	return []Paper{p1, p2}
 }
-func (r *PaperRepository) GetPapers(keyword string) []Paper {
+func (r PaperRepository) GetPapers(keyword string) []Paper {
 	p1 := make(Paper)
-	p1["id"] = 1000
-	p1["userId"] = 1000
-	p1["contentId"] = 2000
+	p1["id"] = int64(1000)
+	p1["userId"] = int64(1000)
+	p1["contentId"] = int64(2000)
 
 	p2 := make(Paper)
-	p2["id"] = 1001
-	p2["userId"] = 1000
-	p2["contentId"] = 2001
+	p2["id"] = int64(1001)
+	p2["userId"] = int64(1000)
+	p2["contentId"] = int64(2001)
 
 	return []Paper{p1, p2}
 }
 
-func (r *PaperRepository) CreatePaper(p Paper) error {
+func (r PaperRepository) CreatePaper(p Paper) error {
+	return nil
 }
-func (r *PaperRepository) UpdatePaper(p Paper) error {
+func (r PaperRepository) UpdatePaper(p Paper) error {
+	return nil
 }
-func (r *PaperRepository) DeletePaper(p Paper) error {
+func (r PaperRepository) DeletePaper(id int64) error {
+	return nil
 }

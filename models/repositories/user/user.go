@@ -8,11 +8,11 @@ type IUserRepository interface {
 
 type UserRepository struct {}
 
-func NewUserRepository *UserRepository {
-  return &UserRepository{}
+func NewUserRepository() UserRepository {
+  return UserRepository{}
 }
 
-func (r *UserRepository) GetUser(id int64) User {
+func (r UserRepository) GetUser(id int64) User {
   u := make(User)
   u["name"] = "hackm"
   u["displayName"] = "Hackathon Monster"

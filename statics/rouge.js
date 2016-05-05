@@ -45,10 +45,12 @@
         reject([new ParameterMissing("id")]);
       } else {
         var url = prefix + "papers/" + id;
-        return loadJson(url, function(paper){
-          return paper && paper.user && paper.content;
-        });
+        resolve(url)
       }
+    }).then(function(url){
+      return loadJson(url, function(paper){
+        return paper && paper.user && paper.content;
+      });
     })
   }
   function loadPapers(params) {
