@@ -12,7 +12,6 @@ import (
 	"../controllers/tag"
 	"../controllers/search"
 	"../controllers/api/tag"
-	"../models/vm"
 )
 
 func Init() *echo.Echo {
