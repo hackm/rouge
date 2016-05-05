@@ -1,7 +1,7 @@
 {{define "tag"}}
-{{template "header" .Meta}}
+{{template "header" .}}
 <layout>
-  <papers tag="go"/>
+  <papers tag="{{.Tag}}"/>
 </layout>
 {{template "footer" .}}
 {{end}}

@@ -1,7 +1,7 @@
 {{define "search"}}
-{{template "header" .Meta}}
+{{template "header" .}}
 <layout>
-  <papers user="hackm" tag="go"/>
+  <papers user="{{.Username}}" tag="{{.Tag}}"/>
 </layout>
 {{template "footer" .}}
 {{end}}

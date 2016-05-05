@@ -1,7 +1,7 @@
 {{define "papers"}}
-{{template "header" .Meta}}
+{{template "header" .}}
 <layout>
-  <papers user="hackm"/>
+  <papers user="{{.Username}}"/>
 </layout>
 {{template "footer" .}}
 {{end}}

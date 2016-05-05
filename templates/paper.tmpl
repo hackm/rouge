@@ -1,7 +1,7 @@
 {{define "paper"}}
-{{template "header" .Meta}}
+{{template "header" .}}
 <layout>
-  <paper id="123" />
+  <paper id="{{.Tag}}" />
 </layout>
 {{template "footer" .}}
 {{end}}

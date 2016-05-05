@@ -20,7 +20,7 @@
     var self = this;
     var paperId = opts.id;
     
-    if(paperId ){
+    if(paperId){
       Rouge.loadPaper(paperId).then(function(paper){
         self.title = paper.content.title;
         self.body = paper.content.body;

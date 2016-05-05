@@ -24,10 +24,11 @@
           'Accept': 'application/json',
         }
       }).then(function(res){
-        if(res.status != 200)
+        if(res.status != 200){
           reject(new AjaxError(res.status, res.statusText));
-          
-        return res.json();
+          return 
+        } else
+          return res.json();
       }).then(function (data) {
         if(typeof validation != 'function')
           resolve(data);
@@ -56,6 +57,7 @@
   }
   
   window.Rouge = {
-    loadPaper: loadPaper
+    loadPaper: loadPaper,
+    loadPapers: loadPapers
   }
 })(window)
