@@ -1,7 +1,7 @@
 package main
 
 import (
-    "./route"
+    "./routes"
     "github.com/labstack/echo/engine/standard"
 )
 

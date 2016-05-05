@@ -5,10 +5,10 @@ import (
 	"github.com/labstack/echo/middleware"
 	"net/http"
 	"../model/vm"
-	"../api/content"
-	"../api/paper"
-	"../api/stock"
-	"../api/tag"
+	"../controllers/api/content"
+	"../controllers/api/paper"
+	"../controllers/api/stock"
+	"../controllers/api/tag"
 )
 
 func Init() *echo.Echo {
@@ -96,6 +96,6 @@ func Init() *echo.Echo {
 		})
 	})
 
-	e.Static("/static", "static")
+	e.Static("/statics", "statics")
 	return e
 }

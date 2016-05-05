@@ -12,7 +12,7 @@ gulp.task('compress',['riot'], function () {
     return gulp.src('build/**/*.js')
         .pipe(uglify())
         .pipe(concat('tags.js'))
-        .pipe(gulp.dest('../../static/themes/simple'));
+        .pipe(gulp.dest('../../statics/themes/simple'));
 });
 gulp.task('watch', function () {
     gulp.watch('src/**/*.tag.html', ['compress']);
