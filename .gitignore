@@ -8,5 +8,9 @@
 # BuildFile
 rouge
 
+#Theme
 node_modules
 themes/**/build
+
+# Vender
+vendor/

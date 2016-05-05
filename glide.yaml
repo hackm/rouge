@@ -1,0 +1,6 @@
+package: .
+import:
+- package: github.com/labstack/echo
+  subpackages:
+  - middleware
+- package: github.com/go-sql-driver/mysql
