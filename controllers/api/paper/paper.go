@@ -23,7 +23,7 @@ func GetPaper(c echo.Context) error {
 
 //CreateUserPaper creates a new paper and content record
 func CreatePaper(c echo.Context) error {
-	return c.String(http.StatusCreated, "create a new paper")
+	return c.String(http.StatusCreated, "create a new paper for " + c.Get("username").(string))
 }
 
 //UpdateUserPaper update a paper for username & ID
