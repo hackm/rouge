@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"../model/vm"
 	"../api/paper"
+	"../api/tag"
 )
 
 func Init() *echo.Echo {
@@ -41,13 +42,12 @@ func Init() *echo.Echo {
 			return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
 		})
 
-		// Tag List
-		api.Get("/tags", func(c echo.Context) error {
-			return c.String(http.StatusOK, "tag list")
-		})
-		api.Get("/tags/:id", func(c echo.Context) error {
-			return c.String(http.StatusOK, "tag(" + c.Param("id") + ")")
-		})
+		// Tag
+		api.Get("/tags", tag.GetTags)
+		api.Get("/tags/:id", tag.GetTag)
+		api.Post("/tags", tag.CreateTag)
+		api.Put("/tags/:id", tag.UpdateTag)
+		api.Delete("/tags/:id", tag.DeleteTag)
 	}
 
 	e.SetRenderer(CreateRenderer())
