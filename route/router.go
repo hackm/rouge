@@ -7,6 +7,7 @@ import (
 	"../model/vm"
 	"../api/content"
 	"../api/paper"
+	"../api/stock"
 	"../api/tag"
 )
 
@@ -36,12 +37,9 @@ func Init() *echo.Echo {
 		api.Delete("/:username/papers/:id/tags", paper.DeletePaperTag)
 
 		// User Stocks
-		api.Get("/:username/stocks", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s stocks")
-		})
-		api.Delete("/:username/stocks/:paper_id", func(c echo.Context) error {
-			return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
-		})
+		api.Get("/:username/stocks", stock.GetStocks)
+		api.Post("/:username/stocks/:paper_id", stock.CreateStock)
+		api.Delete("/:username/stocks/:paper_id", stock.DeleteStock)
 
 		// Tag
 		api.Get("/tags", tag.GetTags)
