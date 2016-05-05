@@ -12,7 +12,7 @@ import (
 	"../controllers/paper"
 	"../controllers/tag"
 	"../controllers/search"
-	myMw "../middlewares"
+	"../middlewares/auth"
 )
 
 func Init() *echo.Echo {
@@ -23,7 +23,7 @@ func Init() *echo.Echo {
 	e.Use(middleware.Logger())  // Log HTTP requests
 	e.Use(middleware.Recover()) // Recover from panics
 	e.Use(middleware.Gzip())    // Send gzip HTTP response
-	e.Use(myMw.BasicAuth())
+	e.Use(auth.Auth())
 	// API Version name
 	api := e.Group("/api")
 	{
