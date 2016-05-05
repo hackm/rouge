@@ -7,15 +7,15 @@ import (
 
 //GetStocks retrieve stock by User
 func GetStocks(c echo.Context) error {
-	return c.String(http.StatusOK, c.Param("username") + "'s stocks")
+	return c.String(http.StatusOK, "get stocks")
 }
 
 //CreateStock create a new stock for paper
 func CreateStock(c echo.Context) error {
-	return c.String(http.StatusOK, c.Param("username")  + " new stock for paper(" + c.Param("paper_id") + ") is created")
+	return c.String(http.StatusOK, "new stock for paper(" + c.Param("paper_id") + ") is created")
 }
 
 //DeleteStock delete stock by user and paper
 func DeleteStock(c echo.Context) error {
-	return c.String(http.StatusOK, c.Param("username") + "'s stock for paper(" + c.Param("paper_id") + ") is deleted")
+	return c.String(http.StatusOK, "stock for paper(" + c.Param("paper_id") + ") is deleted")
 }

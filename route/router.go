@@ -23,23 +23,23 @@ func Init() *echo.Echo {
 	api := e.Group("/api")
 	{
 		//User Papers
-		api.Get("/:username/papers", paper.GetUserPapers)
-		api.Get("/:username/papers/:id", paper.GetPaper)
-		api.Post("/:username/papers", paper.CreatePaper)
-		api.Put("/:username/papers/:id", paper.UpdatePaper)
-		api.Delete("/:username/papers/:id", paper.DeletePaper)
+		api.Get("/papers", paper.GetUserPapers)
+		api.Get("/papers/:id", paper.GetPaper)
+		api.Post("/papers", paper.CreatePaper)
+		api.Put("/papers/:id", paper.UpdatePaper)
+		api.Delete("/papers/:id", paper.DeletePaper)
 
 		//User Paper Conntents
-		api.Get("/:username/papers/:id/contents", content.GetContents)
+		api.Get("/papers/:id/contents", content.GetContents)
 
 		//User Paper Tags
-		api.Post("/:username/papers/:id/tags", paper.AddPaperTag)
-		api.Delete("/:username/papers/:id/tags", paper.DeletePaperTag)
+		api.Post("/papers/:id/tags", paper.AddPaperTag)
+		api.Delete("/papers/:id/tags", paper.DeletePaperTag)
 
 		// User Stocks
-		api.Get("/:username/stocks", stock.GetStocks)
-		api.Post("/:username/stocks/:paper_id", stock.CreateStock)
-		api.Delete("/:username/stocks/:paper_id", stock.DeleteStock)
+		api.Get("/stocks", stock.GetStocks)
+		api.Post("/stocks/:paper_id", stock.CreateStock)
+		api.Delete("/stocks/:paper_id", stock.DeleteStock)
 
 		// Tag
 		api.Get("/tags", tag.GetTags)
@@ -56,14 +56,14 @@ func Init() *echo.Echo {
 				Title: "Papers",
 				Description: "This is paper list page.",
 			},
-			Theme: "simple"
+			Theme: "simple",
 		})
 	})
 	e.Get("/:username/papers/:id", func (c echo.Context) error{
 		return c.Render(http.StatusOK, "paper", vm.ViewData{
 			Meta: vm.Meta{
 				Title: "Paper",
-				Description: "This is paper page."
+				Description: "This is paper page.",
 			},
 			Theme: "simple",
 		})
@@ -72,7 +72,7 @@ func Init() *echo.Echo {
 		return c.Render(http.StatusOK, "tags", vm.ViewData{
 			Meta: vm.Meta{
 				Title: "Tags",
-				Description: "This is tag list page."
+				Description: "This is tag list page.",
 			},
 			Theme: "simple",
 		})
@@ -81,7 +81,7 @@ func Init() *echo.Echo {
 		return c.Render(http.StatusOK, "tag", vm.ViewData{
 			Meta: vm.Meta{
 				Title: "Tag",
-				Description: "This is tag page."
+				Description: "This is tag page.",
 			},
 			Theme: "simple",
 		})

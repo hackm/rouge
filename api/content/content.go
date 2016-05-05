@@ -7,5 +7,5 @@ import (
 
 //GetPaperContents retrieve paper's contents list
 func GetContents(c echo.Context) error {
-	return c.String(http.StatusOK, c.Param("username") + "'s paper(" + c.Param("id") + ") contents")
+	return c.String(http.StatusOK, "paper(" + c.Param("id") + ") contents")
 }
