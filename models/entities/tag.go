@@ -1,4 +1,4 @@
-package model
+package entity
 
 // Tag struct
 type Tag struct {

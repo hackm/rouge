@@ -1,4 +1,4 @@
-package user
+package entity
 
 // User struct
 type User struct {
