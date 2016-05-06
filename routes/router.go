@@ -12,7 +12,7 @@ import (
 	"../controllers/paper"
 	"../controllers/tag"
 	"../controllers/search"
-	//"../middlewares/auth"
+	"../middlewares/auth"
 )
 
 func Init() *echo.Echo {
@@ -23,7 +23,6 @@ func Init() *echo.Echo {
 	e.Use(middleware.Logger())  // Log HTTP requests
 	e.Use(middleware.Recover()) // Recover from panics
 	e.Use(middleware.Gzip())    // Send gzip HTTP response
-	// e.Use(auth.Auth())
 	// API Version name
 	api := e.Group("/api")
 	{
@@ -33,28 +32,28 @@ func Init() *echo.Echo {
 		//User Papers
 		api.Get("/papers", apiPaper.GetUserPapers)
 		api.Get("/papers/:id", apiPaper.GetPaper)
-		api.Post("/papers", apiPaper.CreatePaper)
-		api.Put("/papers/:id", apiPaper.UpdatePaper)
-		api.Delete("/papers/:id", apiPaper.DeletePaper)
+		api.Post("/papers", apiPaper.CreatePaper, auth.Auth())
+		api.Put("/papers/:id", apiPaper.UpdatePaper, auth.Auth())
+		api.Delete("/papers/:id", apiPaper.DeletePaper, auth.Auth())
 
 		//User Paper Conntents
-		api.Get("/papers/:id/contents", apiContent.GetContents)
+		api.Get("/papers/:id/contents", apiContent.GetContents, auth.Auth())
 
 		//User Paper Tags
-		api.Post("/papers/:id/tags", apiPaper.AddPaperTag)
-		api.Delete("/papers/:id/tags", apiPaper.DeletePaperTag)
+		api.Post("/papers/:id/tags", apiPaper.AddPaperTag, auth.Auth())
+		api.Delete("/papers/:id/tags", apiPaper.DeletePaperTag, auth.Auth())
 
 		// User Stocks
 		api.Get("/stocks", apiStock.GetStocks)
-		api.Post("/stocks/:paper_id", apiStock.CreateStock)
-		api.Delete("/stocks/:paper_id", apiStock.DeleteStock)
+		api.Post("/stocks/:paper_id", apiStock.CreateStock, auth.Auth())
+		api.Delete("/stocks/:paper_id", apiStock.DeleteStock, auth.Auth())
 
 		// Tag
 		api.Get("/tags", apiTag.GetTags)
 		api.Get("/tags/:id", apiTag.GetTag)
-		api.Post("/tags", apiTag.CreateTag)
-		api.Put("/tags/:id", apiTag.UpdateTag)
-		api.Delete("/tags/:id", apiTag.DeleteTag)
+		api.Post("/tags", apiTag.CreateTag, auth.Auth())
+		api.Put("/tags/:id", apiTag.UpdateTag, auth.Auth())
+		api.Delete("/tags/:id", apiTag.DeleteTag, auth.Auth())
 	}
 
 	e.SetRenderer(CreateRenderer())
