@@ -1,6 +1,6 @@
 (function (window) {
   "use strict";
-  var prefix = "/api/";
+  var prefix = "/paper@hackm/api/";
   
   function ParameterMissingError(paramName) {
     this.message = "Parameter Missing(" + paramName + ")";
