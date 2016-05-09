@@ -30,6 +30,8 @@ func Init() *echo.Echo {
   plugin2.Init(p2)
   
   
+  engine.AddTemplate("templates/footer.tmpl")
+  engine.AddTemplate("templates/header.tmpl")
 	e.SetRenderer(engine.NewRenderer())	
 	e.Static("/statics", "statics")
 	

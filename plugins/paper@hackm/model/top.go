@@ -1,6 +1,8 @@
 package model
 
+import "../../../engine"
+
 type Top struct {
-  Meta Meta
-  Theme Theme
+  Meta engine.Meta
+  Theme engine.Theme
 }

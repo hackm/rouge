@@ -15,10 +15,10 @@ func (t *Renderer) Render(w io.Writer, name string, data interface{}, e echo.Con
 }
 
 var templates []string
-// func AddTemplate(path string) {
-//   templates = append(templates, path)
-// }
-func AddTemplate(plugin, relationPath string) {
+func AddTemplate(path string) {
+  templates = append(templates, path)
+}
+func AddPluginTemplate(plugin, relationPath string) {
   templates = append(templates, "plugins/" + plugin + "/" + relationPath)
 }
 

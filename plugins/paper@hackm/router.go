@@ -28,11 +28,11 @@ func Init(g *echo.Group) error {
     a.Put("/papers/:id", api.PutPaper, engine.Authorize())
     a.Delete("/papers/:id", api.DeletePaper, engine.Authorize())    
   }
-  engine.AddTemplate(PLUGIN_NAME, "template/footer.tmpl")
-  engine.AddTemplate(PLUGIN_NAME, "template/header.tmpl")
-  engine.AddTemplate(PLUGIN_NAME, "template/paper.tmpl")
-  engine.AddTemplate(PLUGIN_NAME, "template/top.tmpl")
+  
+  engine.AddPluginTemplate(PLUGIN_NAME, "template/paper.tmpl")
+  engine.AddPluginTemplate(PLUGIN_NAME, "template/top.tmpl")
   g.Get("/", controller.GetPapers)
   g.Get("/papers/:id", controller.GetPaper)
+  
   return nil
 }

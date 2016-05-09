@@ -1,7 +1,9 @@
 package model
 
+import "../../../engine"
+
 type Paper struct {
-  Meta Meta
-  Theme Theme
+  Meta engine.Meta
+  Theme engine.Theme
   Id string
 }

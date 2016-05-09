@@ -12,6 +12,6 @@ func Init(g *echo.Group) error {
   // {
   //   // a.Post("/users", api.CreateUser)   
   // }
-  engine.AddTemplate(PLUGIN_NAME, "template/register.tmpl")
+  engine.AddPluginTemplate(PLUGIN_NAME, "template/register.tmpl")
   return nil
 }
