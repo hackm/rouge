@@ -20,35 +20,33 @@ func NewPaperService() *PaperService {
 	}
 }
 
-// func (p Paper) loadLazy() {
-//   _, cc := p["content"]
-// 	_, uc := p["user"]
-// }
+func (ps *PaperService) loadLazy(p paper.Paper) {
+	const CONTENT string = "content"
+	const CONTENT_ID string = "contentId"
+	const USER string = "user"
+	const USER_ID string = "userId"
+	if p != nil {
+		_, cc := p[CONTENT]
+		_, uc := p[USER]
+		if !cc {
+			p[CONTENT] = ps.ContentRepository.GetContent(p[CONTENT_ID].(int64))
+		}
+		if !uc {
+			p[USER] = ps.UserRepository.GetUser(p[USER_ID].(int64))
+		}
+	}
+}
 
 func (ps *PaperService) GetPaper(id int64) paper.Paper {
 	p := ps.PaperRepository.GetPaper(id)
-	_, cc := p["content"]
-	_, uc := p["user"]
-	if !cc {
-		p["content"] = ps.ContentRepository.GetContent(p["contentId"].(int64));
-	}
-	if !uc {
-		p["user"] = ps.UserRepository.GetUser(p["userId"].(int64));
-	}
+	ps.loadLazy(p)
 	return p
 }
 
 func (ps *PaperService) GetUserPapers(id int64) []paper.Paper {
 	pl := ps.PaperRepository.GetUserPapers(id);
 	for _, p := range pl {
-		_, cc := p["content"]
-		_, uc := p["user"]
-		if !cc {
-      p["content"] = ps.ContentRepository.GetContent(p["contentId"].(int64));
-    }
-    if !uc {
-      p["user"] = ps.UserRepository.GetUser(p["userId"].(int64));
-    }
+		ps.loadLazy(p)
 	}
 
 	return pl
@@ -57,14 +55,7 @@ func (ps *PaperService) GetUserPapers(id int64) []paper.Paper {
 func (ps *PaperService) GetTagPapers(tag string) []paper.Paper {
 	pl := ps.PaperRepository.GetTagPapers(tag);
 	for _, p := range pl {
-		_, cc := p["content"]
-		_, uc := p["user"]
-		if !cc {
-      p["content"] = ps.ContentRepository.GetContent(p["contentId"].(int64));
-    }
-    if !uc {
-      p["user"] = ps.UserRepository.GetUser(p["userId"].(int64));
-    }
+		ps.loadLazy(p)
 	}
 	return pl
 }
@@ -72,14 +63,7 @@ func (ps *PaperService) GetTagPapers(tag string) []paper.Paper {
 func (ps *PaperService) GetPapers(keyword string) []paper.Paper {
 	pl := ps.PaperRepository.GetPapers(keyword);
 	for _, p := range pl {
-		_, cc := p["content"]
-		_, uc := p["user"]
-		if !cc {
-      p["content"] = ps.ContentRepository.GetContent(p["contentId"].(int64));
-    }
-    if !uc {
-      p["user"] = ps.UserRepository.GetUser(p["userId"].(int64));
-    }
+		ps.loadLazy(p)
 	}
 	return pl
 }
