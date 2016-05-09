@@ -27,6 +27,6 @@ func GetPaper(c echo.Context) error {
     Theme: engine.Theme {
       Name: "simple",
     },
-    Id: c.Param(":id"),
+    Id: c.Param("id"),
   })
 }
