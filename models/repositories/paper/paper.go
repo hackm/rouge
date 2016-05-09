@@ -8,7 +8,7 @@ type IPaperRepository interface {
 	GetTagPapers(tag string) []Paper
 	GetPapers(keyword string) []Paper
 
-	CreatePaper(p Paper) error
+	CreatePaper(p Paper) (Paper, error)
 	UpdatePaper(p Paper) error
 	DeletePaper(id int64) error
 }
@@ -53,11 +53,11 @@ func (r *PaperRepository) GetPapers(keyword string) []Paper {
 }
 
 var index = int64(1000)
-func (r *PaperRepository) CreatePaper(p Paper) error {
+func (r *PaperRepository) CreatePaper(p Paper) (Paper, error) {
 	index = index + 1
 	p["id"] = index
 	r.store = append(r.store, p)
-	return nil
+	return p, nil
 }
 
 func (r *PaperRepository) UpdatePaper(p Paper) error {

@@ -67,3 +67,20 @@ func (ps *PaperService) GetPapers(keyword string) []paper.Paper {
 	}
 	return pl
 }
+
+func (ps *PaperService) GetPaperContents(paperId int64) []content.Content {
+	return ps.ContentRepository.GetPaperContents(paperId)
+}
+
+func (ps *PaperService) CreatePaper(p paper.Paper) (paper.Paper, error) {
+	cc, _ := ps.ContentRepository.CreateContent(p["content"].(content.Content))
+	cp, _ := ps.PaperRepository.CreatePaper(paper.Paper{"contentId": cc["id"]})
+	return cp, nil
+}
+
+func (ps *PaperService) UpdatePaper(p paper.Paper) (paper.Paper, error) {
+	cc, _ := ps.ContentRepository.CreateContent(p["content"].(content.Content))
+	p["contentId"] = cc["id"]
+	_ = ps.PaperRepository.UpdatePaper(p)
+	return p, nil
+}
