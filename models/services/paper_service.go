@@ -1,4 +1,4 @@
-package paper_service
+package services
 
 import (
 	"../repositories/user"

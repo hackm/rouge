@@ -1,4 +1,4 @@
-package user_manager
+package services
 
 type UserManager struct {
 

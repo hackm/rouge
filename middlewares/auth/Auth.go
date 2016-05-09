@@ -2,12 +2,12 @@ package auth
 
 import (
 	"github.com/labstack/echo"
-	userManager "../../models/user_manager"
+	"../../models/services"
 )
 
 func Auth() echo.MiddlewareFunc {
 	return BasicAuth(func(username, password string) bool {
-		userManager := userManager.NewUserManager()
+		userManager := services.NewUserManager()
 		return userManager.ValidateUser(username, password)
 	}, func(c echo.Context, username string) {
 		c.Set("username", username)

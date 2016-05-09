@@ -4,7 +4,7 @@ import (
 	"github.com/labstack/echo"
 	"net/http"
 	"strconv"
-	pagerService "../../../models/paper_service"
+	"../../../models/services"
 )
 
 //GetUserPapers retrieves papers
@@ -20,7 +20,7 @@ func GetUserPapers(c echo.Context) error {
 //GetUserPaper retrieves papers by username & ID
 func GetPaper(c echo.Context) error {
 	id, _ := strconv.ParseInt(c.Param("id"), 10, 64)
-	s := pagerService.NewPaperService()
+	s := services.NewPaperService()
 	p := s.GetPaper(id)
 	return c.JSON(http.StatusOK, p)
 }
