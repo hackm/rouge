@@ -1,0 +1,10 @@
+{
+  "name": "Rouge User",
+  "version": "0.1.0",
+  "author": "hackm",
+  "url": "",
+  "license": "MIT",
+  "loadLibraries":{
+  },
+  "dependencies":[]
+}

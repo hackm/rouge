@@ -1,0 +1,15 @@
+{
+  "plugins":[
+    "user@hackm",
+    "basic-auth@hackm",
+    "paper@hackm"
+  ],
+  "proxy": {
+    "/": "/paper@hackm/top",
+    "/papers": "paper@hackm/papers",
+    "/papers/:id": "paper@hackm/papers/:id",
+    "/search": "paper@hackm/search",
+    "/tags": "paper@hackm/tags",
+    "/tags/:name": "paper@hackm/tags/:name"
+  }
+}

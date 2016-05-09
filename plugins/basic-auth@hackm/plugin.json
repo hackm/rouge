@@ -1,0 +1,12 @@
+{
+  "name": "Rouge Basic Auth",
+  "version": "0.1.0",
+  "author": "hackm",
+  "url": "",
+  "license": "MIT",
+  "loadLibraries":{
+  },
+  "dependencies":[
+    "user@hackm"
+  ]
+}

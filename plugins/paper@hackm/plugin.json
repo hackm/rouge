@@ -1,0 +1,16 @@
+{
+  "name": "Rouge Paper",
+  "version": "0.1.0",
+  "author": "hackm",
+  "url": "",
+  "license": "MIT",
+  "entryPoint": "",
+  "loadLibraries":{
+    "text/javascript": [
+      "static/js/paper@hackm.js"
+    ]
+  },
+  "dependencies": [
+    "user@hackm"
+  ]
+}
